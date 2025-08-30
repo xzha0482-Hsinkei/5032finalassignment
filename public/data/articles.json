@@ -1,0 +1,5 @@
+[
+  { "id":"check-in", "title":"Checking in with yourself: mood, sleep, stress", "excerpt":"Quick self-check steps.", "tags":["mental-health"], "updatedAt":"2025-08-20", "href":"#" },
+  { "id":"psa-basics", "title":"Prostate screening basics", "excerpt":"Understand PSA testing and when to talk to your GP.", "tags":["prostate"], "updatedAt":"2025-08-18", "href":"#" },
+  { "id":"tse-3min", "title":"Testicular self-exam: a 3-minute routine", "excerpt":"Know what’s normal and when to seek care.", "tags":["testicular"], "updatedAt":"2025-08-15", "href":"#" }
+]

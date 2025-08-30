@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Men’s Mental Fitness Workshops",
+    "excerpt": "4-week small-group routines for connection and resilience.",
+    "details": { "audience": "Men 18+", "duration": "4 weeks · 90 mins/week", "location": "Carlton & CBD", "partners": ["Local clinics","Community orgs"] },
+    "cta": { "label": "Register interest", "href": "#" }
+  },
+  {
+    "title": "Prostate & Testicular Health Info Sessions",
+    "excerpt": "Evidence-based talks and referral pathways.",
+    "details": { "audience": "Men 40+ (and partners)", "duration": "1.5 hours", "location": "CBD & Online", "partners": ["GPs","PCFA"] },
+    "cta": { "label": "Request a session", "href": "mailto:programs@your-nfp.org" }
+  },
+  {
+    "title": "Move Together – Community Walks",
+    "excerpt": "Low-barrier weekly activity groups.",
+    "details": { "audience": "All ages", "duration": "Weekly", "location": "Royal Botanic Gardens", "partners": ["Councils","Clubs"] },
+    "cta": { "label": "Join a group", "href": "#" }
+  }
+]

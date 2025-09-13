@@ -1,64 +1,73 @@
 <template>
-  <div>
-    <Hero title="Join us to improve men’s health" subtitle="Donate, volunteer, or partner — every action makes a difference.">
-      <template #side-panel>
-        <FormCard title="Volunteer interest" desc="We’ll contact you within 3–5 business days.">
-          <VolunteerForm />
-        </FormCard>
-      </template>
-    </Hero>
+  
+  <section class="band hero">
+    <div class="container">
+      <h1 class="h1">Join us to improve men’s health</h1>
+      <p class="lead">Donate, volunteer, or partner — every action makes a difference.</p>
+    </div>
+  </section>
 
-    <section class="py-4">
-      <div class="container">
-        <div class="row g-4">
-          <div class="col-md-6">
-            <div class="card p-3 h-100">
-              <h4>Where your donation goes</h4>
-              <ul class="mb-0">
-                <li>40% Education & resources</li>
-                <li>35% Community programs</li>
-                <li>25% Evaluation & research</li>
-              </ul>
-              <div class="mt-3">
-                <a href="mailto:donate@your-nfp.org" class="btn btn-primary me-2">Donate one-off</a>
-                <a href="mailto:donate@your-nfp.org?subject=Monthly%20donation" class="btn btn-outline-secondary">Make it monthly</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card p-3 h-100">
-              <h4>Partner with us</h4>
-              <p>Corporate sponsorship, community co-hosted events, and workplace/campus talks.</p>
-              <a href="mailto:partnerships@your-nfp.org" class="btn btn-outline-secondary">Request a Partnership Kit</a>
-            </div>
-          </div>
-        </div>
+  
+  <section class="section">
+    <div class="container" style="max-width:720px">
+      <h2 class="h2">Volunteer interest</h2>
+      <p class="lead">We’ll contact you within 3–5 business days.</p>
+      <div class="card" style="padding:16px">
+        <VolunteerForm />
       </div>
-    </section>
+    </div>
+  </section>
 
-    <CardsGrid title="Upcoming events" :items="eventsMapped" />
+  
+  <section class="section">
+    <div class="container">
+      <h2 class="h2">Where your donation goes</h2>
+      <p class="lead">Your gift supports education resources, community programs, and continuous evaluation.</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
+        <a class="btn btn-primary" href="mailto:donate@your-nfp.org" rel="noopener">Donate now</a>
+        <a class="btn btn-ghost" href="mailto:donate@your-nfp.org?subject=Monthly%20donation" rel="noopener">Make it monthly</a>
+      </div>
+    </div>
+  </section>
 
-    <section class="container small text-muted py-3">
-      <p class="mb-0"><strong>Disclaimer:</strong> Information is educational only and not medical advice.</p>
-    </section>
-  </div>
+  
+  <section class="section">
+    <div class="container">
+      <h2 class="h2">Upcoming events</h2>
+      <div class="grid grid-3">
+        <article v-for="e in events" :key="e.title" class="card" style="padding:16px">
+          <h3 style="margin:0 0 6px">{{ e.title }}</h3>
+          <p class="lead" style="margin:0 0 10px">{{ e.meta }}</p>
+          <a class="btn btn-ghost" :href="(e.cta && e.cta.href) || '#'" rel="noopener">
+            {{ (e.cta && e.cta.label) || 'RSVP' }}
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section">
+    <div class="container">
+      <div class="card" style="padding:24px">
+        <blockquote style="text-align:center;margin:0">
+          <div style="font-size:28px;color:var(--brand)">“</div>
+          <p style="margin:6px 0">Volunteering here helped me reconnect with my community.</p>
+          <footer class="small" style="color:var(--muted)">Sam, Volunteer</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script setup>
-import Hero from '@/components/sections/Hero.vue'
-import FormCard from '@/components/sections/FormCard.vue'
-import VolunteerForm from '@/components/forms/VolunteerForm.vue'
-import CardsGrid from '@/components/sections/CardsGrid.vue'
+import { ref, onMounted } from 'vue'
 import { useFetchJson } from '@/composables/useFetchJson'
-import { ref, onMounted, computed } from 'vue'
+import VolunteerForm from '@/components/forms/VolunteerForm.vue'
 
 const events = ref([])
+
 onMounted(async () => {
-  events.value = await useFetchJson('/data/events.json', [
-    { title:'Men’s Mental Fitness – 4-week Workshop', meta:'Carlton · Wed evenings', cta:{ label:'RSVP', href:'#' } }
-  ])
+  events.value = await useFetchJson('/data/events.json', [])
 })
-const eventsMapped = computed(() =>
-  events.value.map(e => ({ title:e.title, excerpt:e.meta, cta:e.cta||{label:'RSVP',href:'#'} }))
-)
 </script>

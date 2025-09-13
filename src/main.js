@@ -1,13 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-
-
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap'
-
-
-import './styles/index.css'
+import './styles/index.css'                 
 
 import TopBar from './components/layout/TopBar.vue'
 import FooterBar from './components/layout/FooterBar.vue'

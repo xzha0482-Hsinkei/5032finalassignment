@@ -1,37 +1,51 @@
 <template>
-  <div>
-    <Hero title="Programs designed with local partners" subtitle="Clinically informed, community-led, and practical.">
-      <template #side-panel>
-        <FormCard title="Request info session">
-          <form @submit.prevent>
-            <div class="mb-3"><label class="form-label">Name</label><input class="form-control" placeholder="Your name"></div>
-            <div class="mb-3"><label class="form-label">Email</label><input type="email" class="form-control" placeholder="you@example.com"></div>
-            <button class="btn btn-primary" type="submit">Send request</button>
-          </form>
-        </FormCard>
-      </template>
-    </Hero>
+  
+  <section class="band hero">
+    <div class="container">
+      <h1 class="h1">Programs designed with local partners</h1>
+      <p class="lead">Clinically informed, community-led, and practical.</p>
+      <p class="small" style="color:#e6f4fb;margin:6px 0 0">
+        Explore our flagship programs and register your interest.
+      </p>
+    </div>
+  </section>
 
-    <CardsGrid title="Our programs" :items="cards" />
-  </div>
+  
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2" v-for="p in programs" :key="p.title" style="align-items:start">
+        <article class="card" style="padding:16px">
+          <h3 style="margin:0 0 6px">{{ p.title }}</h3>
+          <p class="lead" style="margin:0 0 10px">{{ p.excerpt }}</p>
+
+          <ul class="list-clean" style="display:grid;gap:6px">
+            <li v-if="p.details?.audience"><strong>Audience:</strong> {{ p.details.audience }}</li>
+            <li v-if="p.details?.duration"><strong>Duration:</strong> {{ p.details.duration }}</li>
+            <li v-if="p.details?.location"><strong>Location:</strong> {{ p.details.location }}</li>
+            <li v-if="p.details?.partners?.length">
+              <strong>Partners:</strong> {{ p.details.partners.join(', ') }}
+            </li>
+          </ul>
+          <div style="margin-top:10px">
+            <a class="btn btn-primary" :href="p.cta?.href || '#'" rel="noopener">{{ p.cta?.label || 'Register interest' }}</a>
+          </div>
+        </article>
+
+        
+        <div class="media-placeholder">Image / Video</div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script setup>
-import Hero from '@/components/sections/Hero.vue'
-import FormCard from '@/components/sections/FormCard.vue'
-import CardsGrid from '@/components/sections/CardsGrid.vue'
 import { ref, onMounted } from 'vue'
 import { useFetchJson } from '@/composables/useFetchJson'
 
-const cards = ref([])
+const programs = ref([])
+
 onMounted(async () => {
-  cards.value = await useFetchJson('/data/programs.json', [
-    {
-      title:'Men’s Mental Fitness Workshops',
-      excerpt:'4-week small-group routines for connection and resilience.',
-      details:{ audience:'Men 18+', duration:'4 weeks', location:'Carlton & CBD', partners:['Local clinics','Community orgs'] },
-      cta:{ label:'Register interest', href:'#' }
-    }
-  ])
+  
+  programs.value = await useFetchJson('/data/programs.json', [])
 })
 </script>

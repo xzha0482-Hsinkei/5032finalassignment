@@ -1,32 +1,49 @@
+<!-- src/components/SiteNav.vue -->
 <template>
-  <header class="bg-white border-bottom sticky-top">
-    <nav class="navbar navbar-expand-md bg-white">
-      <div class="container">
-        <router-link class="navbar-brand fw-semibold" to="/">Men’s Health NFP</router-link>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <!-- 左侧品牌 -->
+      <router-link to="/" class="brand" aria-label="Home">
+        Men’s Health NFP
+      </router-link>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
-                aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <!-- 右侧链接 -->
+      <div class="links">
+        <router-link to="/programs">Programs</router-link>
+        <router-link to="/learn">Learn</router-link>
+        <router-link to="/get-involved">Get Involved</router-link>
 
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav ms-auto align-items-md-center">
-            <li class="nav-item">
-              <router-link to="/programs" class="nav-link" :class="{ active: $route.path.startsWith('/programs') }">Programs</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/learn" class="nav-link" :class="{ active: $route.path.startsWith('/learn') }">Learn</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/get-involved" class="nav-link" :class="{ active: $route.path.startsWith('/get-involved') }">Get Involved</router-link>
-            </li>
-            <li class="nav-item ms-md-2 mt-2 mt-md-0">
-              <a href="#donate" class="btn btn-gradient btn-sm px-3">Donate</a>
-            </li>
-          </ul>
+        <!-- 仅管理员显示 -->
+        <router-link v-if="adminOk" to="/admin">Admin</router-link>
+
+        <!-- 认证区：未登录显示 login/register；已登录显示邮箱与退出 -->
+        <router-link v-if="!isAuthenticated" to="/login">Login</router-link>
+        <router-link v-if="!isAuthenticated" to="/register">Register</router-link>
+
+        <div v-else class="account">
+          <span class="small" style="color:#334155">{{ user?.email }}</span>
+          <button class="btn btn-ghost" @click="onLogout">Logout</button>
         </div>
       </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
 </template>
-<script setup></script>
+
+<script setup>
+import { useRouter } from 'vue-router'
+import { isAuthenticated, hasRole, logout, useCurrentUser } from '@/composables/useAuth'
+
+const router   = useRouter()
+const adminOk  = hasRole(['admin'])     
+const user     = useCurrentUser()       
+
+function onLogout () {
+  logout()
+  router.push('/')                      
+}
+</script>
+
+<style scoped>
+.brand { font-weight: 700; }
+.account { display: inline-flex; align-items: center; gap: 8px; }
+</style>

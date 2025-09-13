@@ -1,5 +1,120 @@
-.card-elevate{transition:transform .2s ease, box-shadow .2s ease}
-.card-elevate:hover{transform:translateY(-3px); box-shadow:0 12px 30px rgba(16,24,40,.08)}
-.btn-gradient{background:linear-gradient(90deg,#0e7fb8,#33bdea);border:0;color:#fff}
-.section-title{position:relative;display:inline-block;padding-bottom:.25rem}
-.section-title::after{content:"";position:absolute;left:0;bottom:0;width:48px;height:3px;border
+/* ==== Theme variables (safe with Bootstrap) ==== */
+:root{
+  --brand:#0c5c83;
+  --brand-2:#0e7fb8;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --bg:#f5f7fb;
+  --accent:#00a7d6;
+  --focus:#2563eb;
+}
+
+
+*{box-sizing:border-box}
+html,body,#app{height:100%}
+body{
+  margin:0;
+  font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;
+  color:var(--ink);
+  background:var(--bg);
+}
+a{color:var(--brand-2); text-decoration:none}
+a:hover{text-decoration:underline}
+
+
+.app-shell{min-height:100%;display:flex;flex-direction:column}
+.page-wrap{flex:1;min-height:60vh}
+
+
+.hero{
+  background:linear-gradient(90deg, #0c5c83 0%, #0e7fb8 100%);
+  color:#fff; padding:3rem 0;
+}
+.hero h1{font-size:2.5rem;line-height:1.1;margin:0 0 .75rem}
+
+.topbar{
+  background:#0a4561;color:#cfe8f5;font-size:14px;
+}
+.footer{
+  background:#0c5c83;color:#e6f2f8;padding:36px 0;
+}
+.footer a{color:#fff}
+
+.gradient-cta{
+  background:linear-gradient(90deg, rgba(12,92,131,1) 0%, rgba(14,127,184,1) 100%);
+  color:#fff; padding:3rem 0;
+}
+
+.video-hero{padding:2.5rem 0;background:#dde6ee;text-align:center}
+.media-band{padding:3rem 0;background:#e9edf3}
+
+
+.small{color:var(--muted);font-size:.875rem}
+.tag{
+  display:inline-block;background:#e6f2f8;color:#0c5c83;
+  border:1px solid #bcd9ea;border-radius:999px;padding:4px 10px;font-size:12px
+}
+.error{color:#b91c1c;font-size:12px;margin-top:6px}
+
+
+:where(a,button,.btn,.form-control,.form-select){
+  outline-color:var(--focus);
+}
+
+
+.container { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+.section { padding: 64px 0; }
+.section--tight { padding: 40px 0; }
+.grid { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: 1.15fr .85fr; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+
+:root{
+  --brand: #0f6a90;           
+  --brand-2: #138ab9;         
+  --ink: #0f172a;            
+  --muted: #475569;           
+  --bg-alt: #f3f6f9;          
+  --card: #fff;               
+}
+
+
+h1, .h1 { font-size: 42px; line-height: 1.2; color: var(--ink); margin: 0 0 12px; }
+h2, .h2 { font-size: 28px; line-height: 1.25; color: var(--ink); margin: 0 0 10px; }
+.lead { font-size: 18px; color: var(--muted); }
+
+
+.band { color:#fff; background: linear-gradient(90deg,var(--brand),var(--brand-2)); }
+.band .title, .band .lead { color:#fff; }
+.hero { padding: 64px 0; }
+.hero .form-card { background: #fff; color:#111; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.12); padding: 20px; }
+
+
+.card { background: var(--card); border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+.btn { display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:10px; border:1px solid transparent; cursor:pointer; }
+.btn-primary { background: var(--brand); color:#fff; }
+.btn-ghost { background: transparent; color: var(--brand); border-color: var(--brand); }
+.btn:disabled { opacity:.6; cursor:not-allowed; }
+
+
+.list-clean { list-style:none; margin:0; padding:0; }
+.media-placeholder { background:#c7d4df; border-radius:10px; height:220px; display:flex; align-items:center; justify-content:center; }
+
+
+.site-nav { background:#fff; border-bottom:1px solid #e5e7eb; }
+.site-nav .nav-inner { height:56px; display:flex; align-items:center; justify-content:space-between; }
+.site-nav .links { display:flex; gap:18px; align-items:center; }
+.site-nav a { text-decoration:none; color:#0f172a; }
+.site-nav a.router-link-active { color: var(--brand); }
+
+
+footer.footer { background: var(--brand); color:#fff; }
+footer .container { padding-top: 32px; padding-bottom: 32px; }
+
+
+input, select, textarea { width:100%; padding:10px 12px; border:1px solid #d1d5db; border-radius:8px; }
+label { font-weight:600; font-size:14px; color:#334155; }

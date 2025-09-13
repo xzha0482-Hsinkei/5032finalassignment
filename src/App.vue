@@ -1,8 +1,8 @@
 <template>
-  <div class="d-flex flex-column min-vh-100">
+  <div class="app-shell">
     <TopBar />
     <SiteNav />
-    <main class="flex-fill">
+    <main class="page-wrap">
       <RouterView />
     </main>
     <FooterBar />

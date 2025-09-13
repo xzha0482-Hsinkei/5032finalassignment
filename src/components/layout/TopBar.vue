@@ -1,11 +1,11 @@
 <template>
   <div class="topbar">
-    <div class="container d-flex align-items-center justify-content-between" style="height:36px">
+    <div class="container wrap">
       <div>📞 03 9000 0000 · ✉ hello@menshealth.org</div>
       <div>
-        <a href="#" class="text-decoration-none text-light">LinkedIn</a>
+        <a href="#" aria-label="LinkedIn">in</a>
         &nbsp;·&nbsp;
-        <a href="#" class="text-decoration-none text-light">Twitter</a>
+        <a href="#" aria-label="Twitter">tw</a>
       </div>
     </div>
   </div>

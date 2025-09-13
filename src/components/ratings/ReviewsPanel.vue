@@ -8,7 +8,7 @@
       <span class="count">({{ allReviews.length }} reviews)</span>
     </header>
 
-    
+    <!-- 提交区 -->
     <div class="editor">
       <div class="rating-row">
         <label>Rate:</label>
@@ -28,7 +28,7 @@
       <p v-if="!isAuthenticated" class="muted">Please log in to submit a review.</p>
     </div>
 
-    
+    <!-- 列表 -->
     <ul class="list">
       <li v-for="r in allReviews" :key="r.id" class="item">
         <StarRating :modelValue="r.rating" :readonly="true" />
@@ -40,19 +40,23 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import StarRating from './StarRating.vue'
 import { useFetchJson } from '@/composables/useFetchJson'
 import { useLocalStorage } from '@/composables/useLocalStorage'
 import { isAuthenticated, useCurrentUser } from '@/composables/useAuth'
 
+/** 1) 公共基线：用 ref 承载，onMounted 异步赋值 */
+const seedReviews = ref([])
+onMounted(async () => {
+  const data = await useFetchJson('/data/reviews.json', [])
+  seedReviews.value = Array.isArray(data) ? data : []
+})
 
-const seedReviews = await useFetchJson('/data/reviews.json', [])
-
-
+/** 2) 本地新增持久化 */
 const localReviews = useLocalStorage('nfp_reviews', [])
 
-
+/** 3) 聚合与平均 */
 const allReviews = computed(() => [...seedReviews.value, ...localReviews.value])
 const avg = computed(() => {
   if (!allReviews.value.length) return 0
@@ -60,7 +64,7 @@ const avg = computed(() => {
   return Number((sum / allReviews.value.length).toFixed(2))
 })
 
-
+/** 4) 提交逻辑与校验 */
 const rating  = ref(0)
 const comment = ref('')
 const me = useCurrentUser()
@@ -70,39 +74,22 @@ function submitReview () {
     alert('Please log in to submit a review.')
     return
   }
-
   const r = Number(rating.value)
   const c = String(comment.value || '')
-
-  
-  if (r < 1 || r > 5) {
-    alert('Rating must be from 1 to 5.')
-    return
-  }
-  if (c.length < 5 || c.length > 300) {
-    alert('Comment must be 5–300 characters.')
-    return
-  }
+  if (r < 1 || r > 5) return alert('Rating must be from 1 to 5.')
+  if (c.length < 5 || c.length > 300) return alert('Comment must be 5–300 characters.')
 
   localReviews.value = [
     ...localReviews.value,
-    {
-      id: crypto.randomUUID(),
-      user: me.value?.email || 'user',
-      rating: r,
-     
-      comment: c,
-      ts: Date.now()
-    }
+    { id: crypto.randomUUID(), user: me.value?.email || 'user', rating: r, comment: c, ts: Date.now() }
   ]
-
-  rating.value = 0
-  comment.value = ''
+  rating.value = 0; comment.value = ''
   alert('Thanks for your feedback!')
 }
 </script>
 
 <style scoped>
+/* 原样保持你的样式 */
 .reviews-panel { padding: 1rem; border-radius: 10px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,.05); }
 .header { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .title { margin: 0; font-size: 1.25rem; }

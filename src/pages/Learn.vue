@@ -58,7 +58,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useFetchJson } from '@/composables/useFetchJson'
-import ReviewsPanel from '@/components/ratings/ReviewsPanel.vue'
+import ReviewsPanel from '@/components/ratings/ReviewsPanel.vue'   
 
 const articles = ref([])
 const kw = ref('')

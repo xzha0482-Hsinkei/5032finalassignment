@@ -1,5 +1,5 @@
 <template>
-  
+  <!-- Hero 区 -->
   <section class="band hero">
     <div class="container">
       <h1 class="h1">Join us to improve men’s health</h1>
@@ -7,7 +7,7 @@
     </div>
   </section>
 
-  
+  <!-- Volunteer 表单 -->
   <section class="section">
     <div class="container" style="max-width:720px">
       <h2 class="h2">Volunteer interest</h2>
@@ -18,7 +18,18 @@
     </div>
   </section>
 
-  
+  <!-- ✅ 新增：地图功能 -->
+  <section class="section">
+    <div class="container" style="max-width:900px">
+      <h2 class="h2">Plan Your Route</h2>
+      <p class="lead">Find the best route from your location to our center or event venue.</p>
+      <div class="card" style="padding:16px">
+        <MapView />
+      </div>
+    </div>
+  </section>
+
+  <!-- 捐赠区块 -->
   <section class="section">
     <div class="container">
       <h2 class="h2">Where your donation goes</h2>
@@ -30,7 +41,7 @@
     </div>
   </section>
 
-  
+  <!-- 活动区块 -->
   <section class="section">
     <div class="container">
       <h2 class="h2">Upcoming events</h2>
@@ -46,7 +57,7 @@
     </div>
   </section>
 
-  
+  <!-- 引用语录 -->
   <section class="section">
     <div class="container">
       <div class="card" style="padding:24px">
@@ -64,6 +75,7 @@
 import { ref, onMounted } from 'vue'
 import { useFetchJson } from '@/composables/useFetchJson'
 import VolunteerForm from '@/components/forms/VolunteerForm.vue'
+import MapView from '@/components/MapView.vue'  // ✅ 新增导入
 
 const events = ref([])
 
@@ -71,3 +83,16 @@ onMounted(async () => {
   events.value = await useFetchJson('/data/events.json', [])
 })
 </script>
+
+<style scoped>
+.h2 {
+  color: #1e3a8a;
+  margin-bottom: 8px;
+}
+.lead {
+  color: #475569;
+}
+.section {
+  padding: 40px 0;
+}
+</style>

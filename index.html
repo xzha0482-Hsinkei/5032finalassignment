@@ -1,19 +1,43 @@
-<meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'">
-
-
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
+    <!-- ✅ CSP：允许访问 Firebase Cloud Function + OpenRouteService -->
+ <meta http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: blob:;
+        connect-src 'self'
+                     https://firestore.googleapis.com
+                     https://firebasestorage.googleapis.com
+                     https://identitytoolkit.googleapis.com
+                     https://securetoken.googleapis.com
+                     https://us-central1-finalassignment-a39fa.cloudfunctions.net;
+        frame-src 'self';
+      ">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>Men’s Health NFP</title>
+
+    <!-- ✅ 字体加载 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+
+    <a href="https://example.com" target="_blank" rel="noopener noreferrer"
+      >External</a
+    >
   </body>
 </html>
-
-<a href="https://example.com" target="_blank" rel="noopener noreferrer">External</a>

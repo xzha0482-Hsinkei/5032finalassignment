@@ -1,5 +1,4 @@
 <template>
-  
   <section class="band hero">
     <div class="container">
       <div class="grid grid-2">
@@ -17,7 +16,9 @@
 
         <div class="card" style="padding:20px">
           <h3 style="margin:0 0 6px">Request info session</h3>
-          <p class="small" style="margin:0 0 10px;color:#475569">We’ll email you within 3–5 days.</p>
+          <p class="small" style="margin:0 0 10px;color:#475569">
+            We’ll email you within 3–5 days.
+          </p>
           <form @submit.prevent="requestInfo" style="display:grid;gap:10px">
             <div>
               <label for="name">Name</label>
@@ -43,13 +44,14 @@
     </div>
   </section>
 
-  
   <section class="section">
     <div class="container">
       <div class="grid grid-2">
         <div>
           <h2 class="h2">Somes Us</h2>
-          <p class="lead">Community-led programs designed with local partners. Flexible formats, measured outcomes, and accessible language.</p>
+          <p class="lead">
+            Community-led programs designed with local partners. Flexible formats, measured outcomes, and accessible language.
+          </p>
           <router-link class="btn btn-ghost" to="/get-involved">Contact us</router-link>
         </div>
         <div class="grid grid-2">
@@ -65,11 +67,27 @@
       </div>
     </div>
   </section>
+
+  <!-- ✅ AI 聊天机器人组件放在页面底部 -->
+  <AiChat />
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
-const name = ref(''); const email = ref(''); const topic = ref('')
-const valid = computed(() => name.value.length >= 2 && email.value.includes('@') && topic.value)
-function requestInfo(){ alert(`Thanks, ${name.value}! We’ll contact you at ${email.value}.`); name.value=''; email.value=''; topic.value='' }
+import AiChat from '@/components/AiChat.vue'   // ✅ 正确导入
+
+const name = ref('')
+const email = ref('')
+const topic = ref('')
+
+const valid = computed(() =>
+  name.value.length >= 2 && email.value.includes('@') && topic.value
+)
+
+function requestInfo() {
+  alert(`Thanks, ${name.value}! We’ll contact you at ${email.value}.`)
+  name.value = ''
+  email.value = ''
+  topic.value = ''
+}
 </script>

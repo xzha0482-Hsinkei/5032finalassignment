@@ -1,5 +1,2 @@
 /*
-  Content-Security-Policy: default-src 'self' https: data: blob:; connect-src 'self' https://*; img-src 'self' https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://*.googleapis.com https://*.gstatic.com data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self';
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: SAMEORIGIN
-  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://tile.openstreetmap.org https://*.tile.openstreetmap.org data: blob:; connect-src 'self' https://firestore.googleapis.com https://firebasestorage.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://us-central1-finalassignment-a39fa.cloudfunctions.net https://generativelanguage.googleapis.com https://api.openrouteservice.org https://*.googleapis.com https://*.gstatic.com https://tile.openstreetmap.org https://*.tile.openstreetmap.org; frame-src 'self';

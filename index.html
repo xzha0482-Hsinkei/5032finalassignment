@@ -2,21 +2,27 @@
 <html lang="en">
   <head>
     <!-- ✅ CSP：允许访问 Firebase Cloud Function + OpenRouteService -->
- <meta http-equiv="Content-Security-Policy"
-      content="
-        default-src 'self';
-        script-src 'self' 'unsafe-inline' 'unsafe-eval';
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-        font-src 'self' https://fonts.gstatic.com;
-        img-src 'self' data: blob:;
-        connect-src 'self'
-                     https://firestore.googleapis.com
-                     https://firebasestorage.googleapis.com
-                     https://identitytoolkit.googleapis.com
-                     https://securetoken.googleapis.com
-                     https://us-central1-finalassignment-a39fa.cloudfunctions.net;
-        frame-src 'self';
-      ">
+<!-- ✅ CSP：允许访问 Firebase Cloud Function + OpenRouteService + OpenStreetMap + Gemini -->
+<meta http-equiv="Content-Security-Policy"
+  content="default-src 'self' https: data: blob:;
+           script-src 'self' 'unsafe-inline' 'unsafe-eval' https:;
+           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+           font-src 'self' https://fonts.gstatic.com data:;
+           img-src 'self' https://tile.openstreetmap.org https://*.tile.openstreetmap.org data: blob:;
+           connect-src 'self'
+                        https://firestore.googleapis.com
+                        https://firebasestorage.googleapis.com
+                        https://identitytoolkit.googleapis.com
+                        https://securetoken.googleapis.com
+                        https://us-central1-finalassignment-a39fa.cloudfunctions.net
+                        https://generativelanguage.googleapis.com
+                        https://api.openrouteservice.org
+                        https://*.googleapis.com
+                        https://*.gstatic.com
+                        https://tile.openstreetmap.org
+                        https://*.tile.openstreetmap.org;
+           frame-src 'self';">
+
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

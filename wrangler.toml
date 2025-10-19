@@ -1,0 +1,5 @@
+name = "5032"
+compatibility_date = "2025-10-19"
+
+[assets]
+directory = "./dist"
